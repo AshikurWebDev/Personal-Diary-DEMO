@@ -1,0 +1,30 @@
+1. Defining the boiler plate
+2. Defining all the function that are being used withint the code.
+3. Creating a structure data type and defining some variable.
+4. Defing the main function.
+5. withint the main function we created a system that take an input from accordint to action of the application(1 for addrecord, 2 for viewrecord, 3 for editrecord, 4 for deleterecord, 5 for editpassword, 6 for exit)
+6. Defining the addrecord function for adding note withint the application
+7.
+
+
+
+
+//*** Structure and function ***//
+A structure is a user define data type that can be used to group element of different types into a single type.
+    struct student {
+        char name[10]
+        int age;
+        int roll_no;
+        float marks;
+    }
+
+    how to invoke this structure data within the function
+    int main(){
+        struct student s1 = {"Nick", 16, 50, 72.5};
+        print(s1.name, s1.age, s1.roll_no, s1.marks)
+    }
+
+    void print(char name[], int age, int roll, float marks){
+        printf("%s, %d, %d, %.2f", name, age, roll, marks)
+    }
+//*** Structure and function ***//
