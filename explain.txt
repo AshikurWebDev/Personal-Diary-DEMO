@@ -1,5 +1,5 @@
 1. Defining the boiler plate
-2. Defining all the function that are being used withint the code.
+2. Defining all the global unction that are being used withint the code.
 3. Creating a structure data type and defining some variable.
 4. Defing the main function.
 5. withint the main function we created a system that take an input from accordint to action of the application(1 for addrecord, 2 for viewrecord, 3 for editrecord, 4 for deleterecord, 5 for editpassword, 6 for exit)

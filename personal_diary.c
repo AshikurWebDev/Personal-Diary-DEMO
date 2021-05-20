@@ -5,9 +5,11 @@
 
 #include<conio.h>
 
-
 #include<string.h>
 
+/*
+*****Global Function******
+*/
 
 int password();
 
@@ -21,35 +23,36 @@ void editpassword();
 
 void deleterecord();
 
-
-struct record
-
+/*
+*****Structure data for reusing the variable******
+*/
+struct record  
 {
-
     char time[6];
 
-    char name[30];
+    char title[30];
 
-    char place[25];
+    char desctiption[25];
 
-    char duration[10];
+    char extraQuote[10];
 
     char note[500];
 
 } ;
 
+/*
+*****Main interface of our software******
+*/
 
 int main()
-
 {
+    int ch; //user input for selection the choice 
 
-    int ch;
+    printf("\n\n\t*********************************************************************\n");
 
-    printf("\n\n\t***********************************\n");
+    printf("\t*PASSWORD PROTECTED PERSONAL DIARY/ Note Book* --Power By Team Python\n");
 
-    printf("\t*PASSWORD PROTECTED PERSONAL DIARY/ Note Book*\n");
-
-    printf("\t***********************************");
+    printf("\t*********************************************************************\n");
 
    while(1)
         {
@@ -68,11 +71,10 @@ int main()
                 printf("\n\tEXIT\t\t[6]");
 
                 printf("\n\n\tENTER YOUR CHOICE:\n");
+
                 printf("========================================\n");
 
                 scanf("%d",&ch);
-
-
             switch(ch)
 
                     {
@@ -81,7 +83,6 @@ int main()
                             addrecord();
 
                             break;
-
 
                             case 2:
 
@@ -95,7 +96,6 @@ int main()
                             editrecord();
 
                             break;
-
 
                             case 4:
 
@@ -113,7 +113,7 @@ int main()
 
                             case 6:
 
-                            printf("\n\n\t\tTHANK YOU FOR USING THE SOFTWARE BY:\n\n\tTeam Arefin");
+                            printf("\n\n\t\tTHANK YOU FOR USING THE SOFTWARE BY:\n\n\tTeam Python.");
 
                             getch();
 
@@ -132,7 +132,7 @@ int main()
 
                     }
 
-                system("cls");
+                system("cls");///Clear the terminal
 
         }
 
@@ -140,13 +140,16 @@ int main()
 
 }
 
+/*
+*****Note added function within our software******
+*/
 void addrecord( )
 
 {
 
                 system("cls");
 
-                FILE *fp ;
+                FILE *fp ; 
 
                 char another = 'Y' ,time[10];
 
@@ -162,19 +165,19 @@ void addrecord( )
 
                 printf("\n\t\t***************************\n\n");
 
-                printf("\n\n\tENTER THE DATE OF RECORD TO BE VIEWED:[yyyy-mm-dd]: ");//This will be used as folder
+                printf("\n\n\tENTER THE DATE OF RECORD TO BE VIEWED:[yyyy-mm-dd]:");//This will be used as folder
 
                 fflush(stdin); //It flush the computer memory for getting the updated data.
 
-                gets(filename);
+                gets(filename); 
 
-                fp = fopen (filename, "ab+" ) ;
+                fp = fopen (filename, "ab+" ) ; 
 
                 if ( fp == NULL )
 
                 {
 
-                fp=fopen(filename,"wb+");
+                fp=fopen(filename,"wb+"); 
 
                 if(fp==NULL)
 
@@ -192,23 +195,20 @@ void addrecord( )
 
                 }
 
-
-
                 while ( another == 'Y'|| another=='y' )
 
                 {
-
                     choice=0;
 
                     fflush(stdin);
 
-                printf ( "\n\tENTER TIME:[hh:mm]:");//this will be used a file of our application.
+                    printf ( "\n\tENTER TIME:[hh:mm]:");//this will be used a file of our application.
 
-                scanf("%s",time);
+                    scanf("%s",time);
 
-                rewind(fp); //function sets the file pointer at the beginning of the stream. It is useful if you have to use stream many times.
+                    rewind(fp); //function sets the file pointer at the beginning of the stream. It is useful if you have to use stream many times.
 
-                while(fread(&e,sizeof(e),1,fp)==1) //fwrite( ptr, int size, int n, FILE *fp ); ptr = reference of an array or structure that stored in memory
+                    while(fread(&e,sizeof(e),1,fp)==1) //fwrite( ptr, int size, int n, FILE *fp ); ptr = reference of an array or structure that stored in memory
 
                 {
 
@@ -234,19 +234,19 @@ void addrecord( )
 
                         fflush(stdin);
 
-                        gets(e.name);
+                        gets(e.title);
 
                         fflush(stdin);
 
                         printf("\tENTER DESCRIPTION:");
 
-                        gets(e.place);
+                        gets(e.desctiption);
 
                         fflush(stdin);
 
                         printf("\tENTER EXTRA QUOTE:");
 
-                        gets(e.duration);
+                        gets(e.extraQuote);
 
                         fflush(stdin);
 
@@ -262,9 +262,9 @@ void addrecord( )
 
                         printf ( "\n\tADD ANOTHER RECORD...(Y/N) " ) ;
 
-                        fflush (stdin) ;
+                        fflush (stdin);
 
-                        another = getchar( ) ;
+                        another = getchar( );  //It takes a single char input
 
                 }
 
@@ -277,16 +277,18 @@ void addrecord( )
 
     }
 
+/*
+***********View record function********
+*/
 
 void viewrecord( )
 
 {
-
         FILE *fpte ;
 
         system("cls");
 
-        struct record customer ;
+        struct record recordedData;
 
         char time[6],choice,filename[14];
 
@@ -298,7 +300,7 @@ void viewrecord( )
 
         printf("\n\t\t*******************************\n\n");
 
-        choice=password();
+        choice=password(); 
 
         if(choice!=0)
 
@@ -355,21 +357,21 @@ void viewrecord( )
 
                             printf("\nTHE WHOLE RECORD FOR %s IS:",filename);
 
-                         while ( fread ( &customer, sizeof ( customer ), 1, fpte ) == 1 )
+                         while ( fread ( &recordedData, sizeof ( recordedData ), 1, fpte ) == 1 )
 
                          {
 
                             printf("\n");
 
-                            printf("\nTIME: %s",customer.time);
+                            printf("\nTIME: %s",recordedData.time);
 
-                            printf("\nMEETING WITH: %s",customer.name);
+                            printf("\nMEETING WITH: %s",recordedData.title);
 
-                            printf("\nMEETING AT: %s",customer.place);
+                            printf("\nMEETING AT: %s",recordedData.desctiption);
 
-                            printf("\nDURATION: %s",customer.duration);
+                            printf("\nDURATION: %s",recordedData.extraQuote);
 
-                            printf("\nNOTE: %s",customer.note);
+                            printf("\nNOTE: %s",recordedData.note);
 
                             printf("\n");
 
@@ -386,26 +388,26 @@ void viewrecord( )
 
                             gets(time);
 
-                            while ( fread ( &customer, sizeof ( customer ), 1, fpte ) == 1 )
+                            while ( fread ( &recordedData, sizeof ( recordedData ), 1, fpte ) == 1 )
 
 
                             {
 
-                                if(strcmp(customer.time,time)==0)
+                                if(strcmp(recordedData.time,time)==0)
 
                                 {
 
                                     printf("\nYOUR RECORD IS:");
 
-                                    printf("\nTIME: %s",customer.time);
+                                    printf("\nTIME: %s",recordedData.time);
 
-                                    printf("\nMEETING WITH: %s",customer.name);
+                                    printf("\nMEETING WITH: %s",recordedData.title);
 
-                                    printf("\nMEETING AT: %s",customer.place);
+                                    printf("\nMEETING AT: %s",recordedData.desctiption);
 
-                                    printf("\nDUARATION: %s",customer.duration);
+                                    printf("\nDUARATION: %s",recordedData.extraQuote);
 
-                                    printf("\nNOTE: %s",customer.note);
+                                    printf("\nNOTE: %s",recordedData.note);
 
                                 }
 
@@ -435,10 +437,12 @@ void viewrecord( )
 
 }
 
+/*
+*******Editing the data of our notebook******
+*/
+
 void editrecord()
-
 {
-
         system("cls");
 
         FILE *fpte ;
@@ -507,11 +511,11 @@ void editrecord()
 
                             printf("\nTIME: %s",customer.time);
 
-                            printf("\nMEETING WITH: %s",customer.name);
+                            printf("\nTITLE: %s",customer.title);
 
-                            printf("\nMEETING AT: %s",customer.place);
+                            printf("\nDESCTIPTION: %s",customer.desctiption);
 
-                            printf("\nDURATION: %s",customer.duration);
+                            printf("\nEXTRAQUOTE: %s",customer.extraQuote);
 
                             printf("\nNOTE: %s",customer.note);
 
@@ -520,11 +524,11 @@ void editrecord()
 
                                 printf("\n1.TIME.");
 
-                                printf("\n2.MEETING PERSON.");
+                                printf("\n2.TITLE");
 
-                                printf("\n3.MEETING PLACE.");
+                                printf("\n3.DESCRIPTION.");
 
-                                printf("\n4.DURATION.");
+                                printf("\n4.EXTRAQUOTE.");
 
                                 printf("\n5.NOTE.");
 
@@ -559,27 +563,27 @@ void editrecord()
 
                                             case 2: printf("\nENTER THE NEW DATA:");
 
-                                                    printf("\nNEW MEETING PERSON:");
+                                                    printf("\nTITLE:");
 
-                                                    gets(customer.name);
+                                                    gets(customer.title);
 
                                                     break;
 
 
                                             case 3: printf("\nENTER THE NEW DATA:");
 
-                                                    printf("\nNEW MEETING PLACE:");
+                                                    printf("\nDESCTIPTION:");
 
-                                                    gets(customer.place);
+                                                    gets(customer.desctiption);
 
                                                     break;
 
 
                                             case 4: printf("\nENTER THE NEW DATA:");
 
-                                                    printf("\nDURATION:");
+                                                    printf("\nEXTRAQUOTE:");
 
-                                                    gets(customer.duration);
+                                                    gets(customer.extraQuote);
 
                                                     break;
 
@@ -599,17 +603,17 @@ void editrecord()
 
                                                      gets(customer.time);
 
-                                                     printf("\nNEW MEETING PERSON:");
+                                                     printf("\nTITLE");
 
-                                                     gets(customer.name);
+                                                     gets(customer.title);
 
-                                                     printf("\nNEW MEETING PLACE:");
+                                                     printf("\nDESCTIPTIOIN");
 
-                                                     gets(customer.place);
+                                                     gets(customer.desctiption);
 
-                                                     printf("\nDURATION:");
+                                                     printf("\nEXTRAQUOTE");
 
-                                                     gets(customer.duration);
+                                                     gets(customer.extraQuote);
 
                                                      printf("\nNOTE:");
 
@@ -668,11 +672,11 @@ void editrecord()
 
                     printf("\nTIME: %s",customer.time);
 
-                    printf("\nMEETING WITH: %s",customer.name);
+                    printf("\nMEETING WITH: %s",customer.title);
 
-                    printf("\nMEETING AT: %s",customer.place);
+                    printf("\nMEETING AT: %s",customer.desctiption);
 
-                    printf("\nDURATION: %s",customer.duration);
+                    printf("\nDURATION: %s",customer.extraQuote);
 
                     printf("\nNOTE: %s",customer.note);
 
@@ -721,6 +725,10 @@ void editrecord()
             getch();
 
 }
+
+/*
+********Password algorithm*******
+*/
 
 int password()
 
@@ -849,6 +857,13 @@ int password()
         return 1;
 
 }
+
+
+/*
+***********Edit password*******
+*/
+
+
 
 void editpassword()
 
@@ -1061,6 +1076,10 @@ void editpassword()
 
 }
 
+/*
+**************Removing the data within our note book
+*/
+
 
 void deleterecord( )
 
@@ -1143,7 +1162,7 @@ void deleterecord( )
 
                             fclose(fp);
 
-                            remove(filename);
+                            remove(filename); 
 
                             printf("\nDELETED SUCCESFULLY...");
 
@@ -1174,7 +1193,7 @@ void deleterecord( )
 
                             }
 
-                            fptr=fopen("temp","wb");
+                            fptr=fopen("temp","wb"); //write mode wb  rb read mode
 
                             if(fptr==NULL)
 
@@ -1241,9 +1260,9 @@ void deleterecord( )
                 }
 
                 printf("\n\n\tPRESS ANY KEY TO EXIT...");
-
+                
                 getch();
 
 }
 
-//finish
+//End//
